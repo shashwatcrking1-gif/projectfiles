@@ -222,11 +222,41 @@ export function Carousel({
     [x, projects.length],
   );
 
+  /* Wheel navigation */
+  const wheelTimeout = useRef<NodeJS.Timeout | null>(null);
+
+  const handleWheel = useCallback(
+    (e: React.WheelEvent) => {
+      const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+      const cur = x.get();
+      const next = cur - delta * 1.5;
+      
+      const minX = -(projects.length - 1) * CARD_STEP;
+      const maxX = 0;
+      const clampedNext = Math.max(minX, Math.min(maxX, next));
+      
+      x.set(clampedNext);
+      
+      if (wheelTimeout.current) clearTimeout(wheelTimeout.current);
+      wheelTimeout.current = setTimeout(() => {
+        const currentX = x.get();
+        const idx = Math.round(-currentX / CARD_STEP);
+        animate(x, -idx * CARD_STEP, {
+          type: "spring",
+          stiffness: 180,
+          damping: 28,
+        });
+      }, 150);
+    },
+    [x, projects.length]
+  );
+
   return (
     <div
       className="absolute inset-0 flex items-center overflow-hidden"
       tabIndex={0}
       onKeyDown={handleKey}
+      onWheel={handleWheel}
       role="listbox"
       aria-label="Project carousel"
     >

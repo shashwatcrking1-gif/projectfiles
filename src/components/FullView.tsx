@@ -25,10 +25,10 @@ export function FullView({
 
   return (
     <div
-      className="absolute inset-0 flex items-center justify-center px-10 md:px-24"
+      className="absolute inset-0 flex items-center justify-center px-10 md:px-24 overflow-y-auto detail-scroll"
       onMouseMove={handleMouseMove}
     >
-      <div className="text-center max-w-5xl leading-[2.2] md:leading-[2.4]">
+      <div className="text-center max-w-5xl leading-[2.2] md:leading-[2.4] py-24">
         {projects.map((p, i) => (
           <span key={p.id} className="inline">
             {i > 0 && (
