@@ -168,6 +168,7 @@ export function Carousel({
   onSelect: (p: Project) => void;
 }) {
   const x = useMotionValue(0);
+  const targetX = useRef(0);
   const dragging = useRef(false);
   const [pad, setPad] = useState(0);
 
@@ -190,7 +191,8 @@ export function Carousel({
             : Math.ceil(-cur / CARD_STEP)
           : Math.round(-cur / CARD_STEP);
       idx = Math.max(0, Math.min(projects.length - 1, idx));
-      animate(x, -idx * CARD_STEP, {
+      targetX.current = -idx * CARD_STEP;
+      animate(x, targetX.current, {
         type: "spring",
         stiffness: 180,
         damping: 28,
@@ -205,14 +207,16 @@ export function Carousel({
       const cur = x.get();
       const idx = Math.round(-cur / CARD_STEP);
       if (e.key === "ArrowRight" && idx < projects.length - 1) {
-        animate(x, -(idx + 1) * CARD_STEP, {
+        targetX.current = -(idx + 1) * CARD_STEP;
+        animate(x, targetX.current, {
           type: "spring",
           stiffness: 180,
           damping: 28,
         });
       }
       if (e.key === "ArrowLeft" && idx > 0) {
-        animate(x, -(idx - 1) * CARD_STEP, {
+        targetX.current = -(idx - 1) * CARD_STEP;
+        animate(x, targetX.current, {
           type: "spring",
           stiffness: 180,
           damping: 28,
@@ -228,20 +232,28 @@ export function Carousel({
   const handleWheel = useCallback(
     (e: React.WheelEvent) => {
       const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
-      const cur = x.get();
-      const next = cur - delta * 1.5;
+      // Keep targetX in sync if dragging changed x
+      if (Math.abs(targetX.current - x.get()) > 1) {
+        targetX.current = x.get();
+      }
+      targetX.current -= delta * 1.5;
       
       const minX = -(projects.length - 1) * CARD_STEP;
       const maxX = 0;
-      const clampedNext = Math.max(minX, Math.min(maxX, next));
+      targetX.current = Math.max(minX, Math.min(maxX, targetX.current));
       
-      x.set(clampedNext);
+      animate(x, targetX.current, {
+        type: "spring",
+        stiffness: 300,
+        damping: 30,
+        mass: 1
+      });
       
       if (wheelTimeout.current) clearTimeout(wheelTimeout.current);
       wheelTimeout.current = setTimeout(() => {
-        const currentX = x.get();
-        const idx = Math.round(-currentX / CARD_STEP);
-        animate(x, -idx * CARD_STEP, {
+        const idx = Math.round(-targetX.current / CARD_STEP);
+        targetX.current = -idx * CARD_STEP;
+        animate(x, targetX.current, {
           type: "spring",
           stiffness: 180,
           damping: 28,
