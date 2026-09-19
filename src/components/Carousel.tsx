@@ -194,8 +194,8 @@ export function Carousel({
       targetX.current = -idx * CARD_STEP;
       animate(x, targetX.current, {
         type: "spring",
-        stiffness: 180,
-        damping: 28,
+        stiffness: 80,
+        damping: 22,
       });
     },
     [x, projects.length],
@@ -210,16 +210,16 @@ export function Carousel({
         targetX.current = -(idx + 1) * CARD_STEP;
         animate(x, targetX.current, {
           type: "spring",
-          stiffness: 180,
-          damping: 28,
+          stiffness: 80,
+          damping: 22,
         });
       }
       if (e.key === "ArrowLeft" && idx > 0) {
         targetX.current = -(idx - 1) * CARD_STEP;
         animate(x, targetX.current, {
           type: "spring",
-          stiffness: 180,
-          damping: 28,
+          stiffness: 80,
+          damping: 22,
         });
       }
     },
@@ -244,8 +244,8 @@ export function Carousel({
       
       animate(x, targetX.current, {
         type: "spring",
-        stiffness: 300,
-        damping: 30,
+        stiffness: 100,
+        damping: 20,
         mass: 1
       });
       
@@ -255,8 +255,8 @@ export function Carousel({
         targetX.current = -idx * CARD_STEP;
         animate(x, targetX.current, {
           type: "spring",
-          stiffness: 180,
-          damping: 28,
+          stiffness: 80,
+          damping: 22,
         });
       }, 150);
     },

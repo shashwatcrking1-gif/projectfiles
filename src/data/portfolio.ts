@@ -3,12 +3,11 @@
 // ============================================================================
 
 export const personalInfo = {
-  name: "Your Name",
-  role: "Video Editor & Software Engineer",
-  tagline: "I edit stories and build software",
-  bio: "A CS engineering student with a passion for visual storytelling. I split my time between crafting cinematic edits and building elegant software — bridging the gap between creativity and code.",
+  name: "SHASHWAT SINHA",
+  role: "CS Student / Video Editor / Software Engineer",
+  bio: "I'm a computer science engineering student who specializes in both storytelling through video and building robust software applications. My work spans high-end freelance video editing and complex engineering projects.",
   philosophy:
-    "My design style is rooted in typography, editorial layouts and simplicity, often combined with motion to create custom experiences that feel polished, modern and considered.",
+    "Whether it's pacing a film to hold attention or architecting a performant web application, it's all about creating seamless, engaging user experiences.",
 };
 
 // ---------------------------------------------------------------------------
