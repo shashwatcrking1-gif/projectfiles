@@ -236,7 +236,8 @@ export function Carousel({
       if (Math.abs(targetX.current - x.get()) > 1) {
         targetX.current = x.get();
       }
-      targetX.current -= delta * 1.5;
+      // Increased multiplier for faster, snappy transitions between slides
+      targetX.current -= delta * 3.5;
       
       const minX = -(projects.length - 1) * CARD_STEP;
       const maxX = 0;
@@ -244,9 +245,9 @@ export function Carousel({
       
       animate(x, targetX.current, {
         type: "spring",
-        stiffness: 100,
-        damping: 20,
-        mass: 1
+        stiffness: 160,
+        damping: 24,
+        mass: 0.8
       });
       
       if (wheelTimeout.current) clearTimeout(wheelTimeout.current);
@@ -255,10 +256,10 @@ export function Carousel({
         targetX.current = -idx * CARD_STEP;
         animate(x, targetX.current, {
           type: "spring",
-          stiffness: 80,
-          damping: 22,
+          stiffness: 120,
+          damping: 24,
         });
-      }, 150);
+      }, 120);
     },
     [x, projects.length]
   );
