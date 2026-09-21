@@ -57,7 +57,7 @@ export function ProjectDetail({
 
           {/* ---- Panel ---- */}
           <motion.div
-            className="relative ml-auto w-full max-w-[1200px] h-full bg-[#0a0a0a] border-l border-white/[0.06] flex flex-col md:flex-row"
+            className="relative ml-auto w-full max-w-[1200px] h-full bg-[#0a0a0a] border-l border-white/[0.06] flex flex-col md:flex-row overflow-y-auto md:overflow-hidden"
             initial={{ x: "100%" }}
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
@@ -66,12 +66,12 @@ export function ProjectDetail({
             {/* Close */}
             <button
               onClick={onClose}
-              className="absolute top-5 right-5 z-10 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors"
+              className="absolute top-4 right-4 sm:top-5 sm:right-5 z-20 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors"
               aria-label="Close"
             >
               <svg
-                width="18"
-                height="18"
+                width="16"
+                height="16"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -84,15 +84,15 @@ export function ProjectDetail({
             </button>
 
             {/* ---- Left info column ---- */}
-            <div className="w-full md:w-[380px] flex-shrink-0 p-8 md:p-10 pt-16 flex flex-col">
+            <div className="w-full md:w-[380px] flex-shrink-0 p-6 sm:p-8 md:p-10 pt-14 sm:pt-16 flex flex-col">
               {/* Category badge */}
-              <span className="text-[10px] uppercase tracking-[0.18em] text-white/40 mb-3">
+              <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.18em] text-white/40 mb-2 sm:mb-3">
                 {project.category === "video"
                   ? "Video Editing"
                   : "Software Engineering"}
               </span>
 
-              <h2 className="text-[28px] md:text-[32px] font-bold text-white leading-tight tracking-tight mb-4">
+              <h2 className="text-[24px] sm:text-[28px] md:text-[32px] font-bold text-white leading-tight tracking-tight mb-3 sm:mb-4">
                 {project.title}
               </h2>
 

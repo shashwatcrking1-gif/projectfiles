@@ -11,7 +11,7 @@ interface FooterProps {
 
 export function Footer({ view, onViewChange }: FooterProps) {
   return (
-    <footer className="fixed bottom-0 left-0 right-0 z-50 flex items-center justify-between px-8 md:px-12 py-6 pointer-events-none">
+    <footer className="fixed bottom-0 left-0 right-0 z-50 flex items-center justify-between px-5 sm:px-8 md:px-12 py-4 sm:py-6 pointer-events-none">
       {/* View toggle */}
       <div className="flex items-center gap-2 text-[11px] md:text-xs uppercase tracking-[0.15em] pointer-events-auto">
         <button
